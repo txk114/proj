@@ -1,4 +1,4 @@
-// Storage Manager (Stubbed)
+// Storage Manager
 const StorageManager = {
     VAULT_KEY: 'local_vault_data',
 
@@ -9,8 +9,9 @@ const StorageManager = {
     },
 
     // Save encrypted vault
-    saveVault: (encryptedData) => {
-        localStorage.setItem(StorageManager.VAULT_KEY, JSON.stringify(encryptedData));
+    saveVault: (vaultPayload) => {
+        // vaultPayload should be an object containing base64 strings of the salt, iv, and ciphertext
+        localStorage.setItem(StorageManager.VAULT_KEY, JSON.stringify(vaultPayload));
     },
 
     // Check if vault is initialized
