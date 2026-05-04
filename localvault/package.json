@@ -1,0 +1,62 @@
+{
+  "name": "localvault",
+  "version": "0.1.0",
+  "description": "LocalVault desktop password manager",
+  "main": "dist-electron/electron/main.js",
+  "author": "LocalVault",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k \"vite --host 127.0.0.1\" \"tsc -p tsconfig.electron.json --watch --preserveWatchOutput\" \"wait-on tcp:5173 dist-electron/electron/main.js && electron .\"",
+    "build": "tsc && vite build && tsc -p tsconfig.electron.json",
+    "preview": "vite preview --host 127.0.0.1",
+    "dist": "npm run build && electron-builder",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "electron": "^30.5.1",
+    "framer-motion": "^11.3.19",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.4.0",
+    "zustand": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
+    "electron-builder": "^24.13.3",
+    "postcss": "^8.4.39",
+    "tailwindcss": "^3.4.6",
+    "typescript": "^5.5.4",
+    "vite": "^5.3.5",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.localvault.app",
+    "productName": "LocalVault",
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "release"
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.productivity"
+    },
+    "win": {
+      "target": "nsis"
+    }
+  }
+}
